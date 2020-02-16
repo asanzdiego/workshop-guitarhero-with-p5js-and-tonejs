@@ -208,14 +208,6 @@ function triggerRelease() {
   synth.triggerRelease();
 }
 
-function touchStarted() {
-  triggerAttack();
-}
-
-function touchEnded() {
-  triggerRelease();
-}
-
 function mousePressed() {
   triggerAttack();
 }
