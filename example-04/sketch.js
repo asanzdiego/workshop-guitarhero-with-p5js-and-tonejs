@@ -1,35 +1,35 @@
 let synth;
-let speed = 10;
+let speed = 5;
 let distance = 200;
 let isStoped = false;
 let noteWidth = 50;
 let noteRadius = 20;
 let notes = [
-  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'D4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'C4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'F4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'E4', duration: '2n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'D4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'C4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'G4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'F4', duration: '2n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'C5', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'A4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'F4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'E4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'D4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'Bb4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'Bb4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'A4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'F4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'G4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0 },
-  { note: 'F4', duration: '2n', x: 0, y: 0, height: 0, color: 0, tone: 0 }
+  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'D4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'C4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'F4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'E4', duration: '2n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'D4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'C4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'G4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'F4', duration: '2n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'C4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'C5', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'A4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'F4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'E4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'D4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'Bb4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'Bb4', duration: '8n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'A4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'F4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'G4', duration: '4n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false },
+  { note: 'F4', duration: '2n', x: 0, y: 0, height: 0, color: 0, tone: 0, played: false }
 ]
 let uniqueNotes = [
   { note: 'A4', color: 0, tone: 220, x: 1 },
@@ -100,7 +100,10 @@ function triggerAttack() {
   for (let i = 0; i < notes.length; i++) {
     let note = notes[i];
     if (note.y >= height / 2) {
-      synth.triggerAttack(note.note, note.duration);
+      if (!note.played) {
+        synth.triggerAttack(note.note, note.duration);
+        note.played = true;
+      }
     }
   }
 }
