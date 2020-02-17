@@ -1,6 +1,7 @@
 let synth;
 let y = 0;
 let speed = 10;
+let isPressed = false;
 
 function setup() {
 
@@ -24,12 +25,28 @@ function draw() {
   if (y < height / 2) {
     y += speed;
   }
+
+  if(isPressed) {
+
+    if (y > height / 2) {
+      synth.triggerAttackRelease('D4', '8n');
+      y=0
+    }
+  }
+}
+
+function touchStarted() {
+  isPressed = true;
+}
+
+function touchEnded() {
+  isPressed = false;
 }
 
 function mousePressed() {
+  isPressed = true;
+}
 
-  if (y > height / 2) {
-    synth.triggerAttackRelease('D4', '8n');
-    y=0
-  }
+function mouseReleased() {
+  isPressed = false;
 }

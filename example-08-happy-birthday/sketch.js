@@ -46,7 +46,7 @@ let uniqueDurations = [
 let isPressed = false;
 let oldIsPressed = false;
 let divX = 0;
-let padWidth = noteWidth * 8;
+let padWidth = 0;
 
 function setup() {
 
@@ -56,6 +56,7 @@ function setup() {
   synth = new Tone.Synth().toMaster();
 
   divX = width / uniqueNotes.length;
+  padWidth = divX*1.5;
 
   let lastY = 0;
   for (let i = 0; i < notes.length; i++) {
@@ -69,6 +70,7 @@ function setup() {
     let uniqueDuration = getUniqueDuration(note.duration);
     note.height = uniqueDuration.y * distance;
     lastY = lastY - note.height;
+    note.visible = true;
   }
 
   colorMode(HSB, 255);
@@ -91,8 +93,10 @@ function draw() {
   for (i = 0; i < notes.length; i++) {
     let note = notes[i];
     fill(note.color, 127, note.tone);
-    text(note.note, note.x - noteWidth * 1.5, note.y);
-    rect(note.x, note.y, noteWidth, -note.height, noteRadius);
+    if (note.visible) {
+      text(note.note, note.x - noteWidth * 1.5, note.y);
+      rect(note.x, note.y, noteWidth, -note.height, noteRadius);
+    }
     if (!isStoped) {
       if (note.y >= height / 2 && !note.played) {
         isStopedLoop = true;
@@ -146,6 +150,9 @@ function triggerAttack() {
 }
 
 function triggerRelease() {
+  if (noteToPlay > 0) {
+    notes[noteToPlay-1].visible = false;
+  }
   synth.triggerRelease();
 }
 

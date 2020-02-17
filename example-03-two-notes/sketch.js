@@ -1,5 +1,6 @@
 let synth;
 let speed = 10;
+let isPressed = false;
 let distance = 100;
 let isStoped = false;
 let notes = [
@@ -35,17 +36,33 @@ function draw() {
       isStoped = true;
     }
   }
+
+  if (isPressed) {
+
+    for (i = 0; i < notes.length; i++) {
+      let note = notes[i];
+      let noteY = note.y - distance * i;
+      if (noteY > height / 2) {
+        synth.triggerAttackRelease(note.note, note.duration);
+        note.y = 0;
+        isStoped = false
+      }
+    }
+  }
+}
+
+function touchStarted() {
+  isPressed = true;
+}
+
+function touchEnded() {
+  isPressed = false;
 }
 
 function mousePressed() {
+  isPressed = true;
+}
 
-  for (i = 0; i < notes.length; i++) {
-    let note = notes[i];
-    let noteY = note.y - distance * i;
-    if (noteY > height / 2) {
-      synth.triggerAttackRelease(note.note, note.duration);
-      note.y = 0;
-      isStoped = false
-    }
-  }
+function mouseReleased() {
+  isPressed = false;
 }

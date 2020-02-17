@@ -44,7 +44,7 @@ let uniqueDurations = [
 let isPressed = false;
 let oldIsPressed = false;
 let divX = 0;
-let padWidth = noteWidth * 8;
+let padWidth = 0;
 
 function setup() {
 
@@ -54,6 +54,7 @@ function setup() {
   synth = new Tone.Synth().toMaster();
 
   divX = width / uniqueNotes.length;
+  padWidth = divX*1.5;
 
   let lastY = 0;
   for (let i = 0; i < notes.length; i++) {
