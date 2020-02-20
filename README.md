@@ -8,4 +8,5 @@
 - [Example 06 Happy Birthday](https://asanzdiego.github.io/workshop-guitarhero-with-p5js-and-tonejs/example-06-happy-birthday/index.html)
 - [Example 07 Happy Birthday](https://asanzdiego.github.io/workshop-guitarhero-with-p5js-and-tonejs/example-07-happy-birthday/index.html)
 - [Example 08 Happy Birthday](https://asanzdiego.github.io/workshop-guitarhero-with-p5js-and-tonejs/example-08-happy-birthday/index.html)
-- [Example 09 Star Wars](https://asanzdiego.github.io/workshop-guitarhero-with-p5js-and-tonejs/example-09-star-wars/index.html)
+- [Example 09 Happy Birthday](https://asanzdiego.github.io/workshop-guitarhero-with-p5js-and-tonejs/example-09-happy-birthday/index.html)
+- [Example 10 Star Wars](https://asanzdiego.github.io/workshop-guitarhero-with-p5js-and-tonejs/example-10-star-wars/index.html)

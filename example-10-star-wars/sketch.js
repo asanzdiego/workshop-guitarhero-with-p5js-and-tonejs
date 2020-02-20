@@ -142,6 +142,8 @@ let isPressed = false;
 let oldIsPressed = false;
 let divX = 0;
 let padWidth = 0;
+let score = 0;
+let activeNote = null;
 
 function setup() {
 
@@ -209,6 +211,7 @@ function draw() {
   if (mouseY < height / 2) {
     stroke(0, 255, 255);
   }
+  text(score, noteWidth, noteWidth);
   rect(mouseX - padWidth, mouseY, padWidth * 2, noteWidth, noteRadius);
 
   if (isPressed) {
@@ -221,24 +224,39 @@ function draw() {
       oldIsPressed = true;
       triggerAttack();
     }
+    if (noteToPlay > 0 && noteToPlay < notes.length && !isStoped && oldIsPressed) {
+      let delta = 0;
+      if (mouseX > activeNote.x) {
+        delta = padWidth - (mouseX - activeNote.x);
+      } else {
+        delta = padWidth - (activeNote.x - mouseX);
+      }
+      delta = Math.round(delta/10);
+      //text(delta, noteWidth, noteWidth*2);
+      score+=delta;
+    }
   } else {
     if (oldIsPressed) {
       oldIsPressed = false;
       triggerRelease();
+    }
+    let delta = 10;
+    if (noteToPlay > 0 && isStoped && !oldIsPressed && score > delta) {
+      score-=delta;
     }
   }
 }
 
 function triggerAttack() {
 
-  let note = notes[noteToPlay];
-  if (note.y >= height / 2
-    && !note.played
-    && note.x > mouseX - padWidth
-    && note.x < mouseX + padWidth
+  activeNote = notes[noteToPlay];
+  if (activeNote && activeNote.y >= height / 2
+    && !activeNote.played
+    && activeNote.x > mouseX - padWidth
+    && activeNote.x < mouseX + padWidth
     && mouseY >= height / 2) {
-    synth.triggerAttack(note.note, note.duration);
-    note.played = true;
+    synth.triggerAttack(activeNote.note, activeNote.duration);
+    activeNote.played = true;
     isStoped = false;
     noteToPlay++;
   }
